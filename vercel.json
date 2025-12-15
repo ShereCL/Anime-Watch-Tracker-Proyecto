@@ -1,3 +1,15 @@
 {
-  "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
+  "buildCommand": "ng build --configuration production",
+  "outputDirectory": "dist/animewatch-tracker/browser",
+  "framework": null,
+  "installCommand": "npm install",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
