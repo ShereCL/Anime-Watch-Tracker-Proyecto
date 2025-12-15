@@ -1,8 +1,6 @@
 {
-  "buildCommand": "ng build --configuration production",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/animewatch-tracker/browser",
-  "framework": null,
-  "installCommand": "npm install",
   "routes": [
     {
       "handle": "filesystem"
