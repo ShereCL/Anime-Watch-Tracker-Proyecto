@@ -1,0 +1,271 @@
+.anime-detail {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  color: var(--text-color);
+  border: 2px solid rgba(0, 217, 255, 0.5);
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(255, 78, 219, 0.2));
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+  animation: fadeIn 0.4s forwards;
+}
+
+.bold {
+  font-weight: bold;
+  color: #00cfff;
+}
+.anime-detail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(255, 78, 219, 0.05));
+  pointer-events: none;
+  border-radius: 15px;
+}
+
+.anime-detail img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 14px;
+  margin-bottom: 22px;
+  display: block;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.25);
+}
+
+.anime-detail h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+.anime-detail p {
+  font-size: 16px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.anime-detail ul {
+  margin-top: 12px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.anime-detail ul li {
+  background-color: rgba(0, 217, 255, 0.1);
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 12px;
+  color: var(--text-color);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+  color: #00eaff;
+}
+.error {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  background: #ff4b4b;
+  color: white;
+  border-radius: 10px;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button */
+.button-add {
+  margin: 20px auto;
+  display: block;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #00eaff;
+  color: black;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #00bcd4;
+  transform: scale(1.05);
+}
+
+/* Episodios */
+.episodes-section {
+  margin-top: 30px;
+}
+
+.episodes-section h2 {
+  color: #00cfff;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.episodes-list {
+  display: grid;
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.episode-card {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(0, 217, 255, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.episode-card:hover {
+  transform: translateX(5px);
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.2);
+}
+
+.episode-number {
+  font-weight: bold;
+  color: #00cfff;
+  min-width: 60px;
+  font-size: 1.1rem;
+}
+
+.episode-info h3 {
+  font-size: 1rem;
+  margin: 0 0 5px 0;
+  color: var(--text-color);
+}
+
+.episode-date {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin: 0;
+}
+
+/* Reseñas */
+.reviews-section {
+  margin-top: 30px;
+}
+
+.reviews-section h2 {
+  color: #00cfff;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.reviews-list {
+  display: grid;
+  gap: 20px;
+}
+
+.review-card {
+  padding: 20px;
+  background: rgba(0, 217, 255, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 217, 255, 0.2);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.review-header strong {
+  color: #00cfff;
+  font-size: 1.1rem;
+}
+
+.review-score {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.review-text {
+  line-height: 1.6;
+  color: var(--text-color);
+  margin: 10px 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.review-date {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.episodes-list::-webkit-scrollbar,
+.review-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.episodes-list::-webkit-scrollbar-track,
+.review-text::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.episodes-list::-webkit-scrollbar-thumb,
+.review-text::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.5);
+  border-radius: 10px;
+}
+
+.episodes-list::-webkit-scrollbar-thumb:hover,
+.review-text::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.7);
+}
+
+.link-episode {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 12px;
+  background: #ff4c4c;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.link-episode:hover {
+  background: #ff2a2a;
+}

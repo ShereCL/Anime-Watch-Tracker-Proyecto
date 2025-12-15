@@ -1,0 +1,31 @@
+<header>
+  <div class="container-header">
+    <div class="logo">
+      <a routerLink="/" class="logo-link">
+        <img src="/assets/img/logo_anime.png" alt="Anime Watch Tracker Logo" class="logo-img" />
+        <h1>Anime Watch Tracker</h1>
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-icon"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a routerLink="/my-list" routerLinkActive="active" class="nav-icon"> Mi Lista </a>
+        </li>
+      </ul>
+    </nav>
+    <button class="theme-button" (click)="toggleTheme()">
+      <span *ngIf="darkMode()">🌙 Dark</span>
+      <span *ngIf="!darkMode()">☀️ Light</span>
+    </button>
+  </div>
+</header>

@@ -1,1 +1,229 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #1b1b2f;
+  --text-color: #fff;
+  --card-bg: #2b2b43;
+  --primary-color: #ff4edb;
+  --secondary-color: #fcd34d;
+  --button-bg: #121224;
+  --button-text: #00eaff;
+  --card-overlay: rgba(31, 31, 40, 0.8);
+  --score-color: #f39c12;
+  --tinder-card-bg: rgba(26, 26, 46, 0.9);
+  --tinder-card-text: #fff;
+  --tinder-card-border: rgba(255, 78, 219, 0.4);
+  --tinder-card-overlay: rgba(31, 31, 40, 0.8);
+}
+
+body.light {
+  --bg-color: #f5f5f5;
+  --text-color: #222;
+  --card-bg: #fff;
+  --primary-color: #0077cc;
+  --secondary-color: #ff9900;
+  --button-bg: #eee;
+  --button-text: #222;
+  --card-overlay: rgba(255, 255, 255, 0.8);
+  --tinder-card-bg: #e8e8ff;
+  --tinder-card-text: #111;
+  --tinder-card-overlay: rgba(255, 255, 255, 0.95);
+  --tinder-card-border: #7c3aed;
+  --btn-list-primary-bg: #00f0ff;
+  --btn-list-primary-text: #111;
+  --btn-list-secondary-bg: #ff4edb;
+  --btn-list-secondary-text: #111;
+  --score-color: #e6c85f;
+}
+
+body.dark {
+  --bg-color: #121224;
+  --text-color: #eee;
+  --card-bg: #1a1a2e;
+  --primary-color: #00eaff;
+  --secondary-color: #ffd700;
+  --button-bg: #121224;
+  --button-text: #00eaff;
+  --card-overlay: rgba(0, 0, 0, 0.5);
+  --tinder-card-bg: var(--card-bg);
+  --tinder-card-text: var(--text-color);
+  --tinder-card-overlay: var(--card-overlay);
+  --tinder-card-border: var(--primary-color);
+  --btn-list-primary-bg: var(--primary-color);
+  --btn-list-primary-text: var(--bg-color);
+  --btn-list-secondary-bg: var(--secondary-color);
+  --btn-list-secondary-text: var(--bg-color);
+}
+
+/* Body y fondo general */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cards */
+.anime-card,
+.search-section-card,
+.top-section {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Textos */
+h1,
+h2,
+h3,
+p,
+label {
+  color: var(--text-color);
+}
+
+/* Botones */
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+/* Inputs y selects */
+input,
+select {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+}
+
+header {
+  background-color: var(--card-bg);
+}
+
+header nav ul li a {
+  color: var(--text-color);
+}
+
+/* Toast */
+.toast {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(0.95) !important;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid var(--primary-color);
+  width: 350px;
+  min-height: 140px;
+  padding: 24px;
+  padding-top: 32px;
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.25s ease;
+  z-index: 9999 !important;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--primary-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.toast-success {
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+}
+
+.toast-error {
+  border: 2px solid #ff3366;
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.6);
+}
+
+.toast-message {
+  margin-bottom: 16px;
+  font-size: 18px;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+/* Barra de carga */
+.loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.loading-bar::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #ff00ff;
+  animation: loading-bar 2s linear forwards;
+}
+
+@keyframes loading-bar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+body.light .my-list h2 {
+  color: #33cfff !important;
+  text-shadow: 0 0 6px rgba(51, 207, 255, 0.5) !important;
+}
+
+body.light select {
+  background: linear-gradient(135deg, #ffffff 0%, #e0f7ff 100%) !important;
+  color: #111 !important;
+  border: 2px solid #00f0ff !important;
+  border-radius: 10px !important;
+  padding: 6px 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 240, 255, 0.3) !important;
+  transition: all 0.3s ease;
+}
+
+body.light select:focus {
+  border-color: #0077cc !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5) !important;
+  outline: none !important;
+}

@@ -1,0 +1,169 @@
+<div class="container">
+  <h1>Mis estadísticas</h1>
+  <div class="stats-section" *ngIf="myListStats.total > 0">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-info">
+          <h3>{{ myListStats.total }}</h3>
+          <p>Animes en tu lista</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-info">
+          <h3>{{ myListStats.totalHours | number : '1.0-0' }}h</h3>
+          <p>Horas vistas</p>
+        </div>
+      </div>
+
+      <div class="stat-card genres-card">
+        <div class="stat-icon"></div>
+        <div class="stat-info">
+          <h3>Géneros favoritos</h3>
+          <ul class="genres-list">
+            <li *ngFor="let genre of myListStats.topGenres">
+              <span class="genre-name">{{ genre.name }}</span>
+              <span class="genre-count">{{ genre.count }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-section">
+    <div class="card-header">
+      <h2>Top 10 animes</h2>
+      <p>Los animes mejor valorados por la comunidad</p>
+    </div>
+    <div *ngIf="loadingTop" class="loading">
+      <div class="spinner"></div>
+      <p>Cargando top animes...</p>
+    </div>
+    <div *ngIf="topAnimes.length && !loadingTop" class="top-grid">
+      <div
+        *ngFor="let anime of topAnimes; let i = index"
+        class="top-card"
+        (click)="goAnimeDetail(anime.mal_id)"
+      >
+        <span class="rank">#{{ i + 1 }}</span>
+        <img [src]="anime.images.jpg.image_url" [alt]="anime.title" />
+        <div class="card-info">
+          <h3>{{ anime.title }}</h3>
+          <p class="score">⭐ {{ anime.score || 'N/A' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1>Buscador de Animes</h1>
+  <form [formGroup]="searchForm" class="search-section-card">
+    <div class="search-section">
+      <input type="text" formControlName="query" placeholder="Buscar anime..." />
+      <select formControlName="type">
+        <option value="">Tipo</option>
+        <option value="tv">Serie TV</option>
+        <option value="movie">Película</option>
+        <option value="ova">OVA</option>
+      </select>
+      <select formControlName="status">
+        <option value="">Estado</option>
+        <option value="airing">En Emisión</option>
+        <option value="complete">Finalizado</option>
+        <option value="upcoming">Proximamente</option>
+      </select>
+      <button type="button" (click)="search()">Buscar</button>
+      <button type="button" (click)="clearFilters()">Limpiar</button>
+    </div>
+  </form>
+  <div *ngIf="loading && results.length === 0" class="loading">
+    <div class="spinner"></div>
+    <p>Buscando animes...</p>
+  </div>
+  <div *ngIf="error && !loading" class="error">
+    {{ error }}
+  </div>
+  <div *ngIf="results.length > 0" class="results">
+    <div *ngFor="let result of results" class="result" (click)="goAnimeDetail(result.mal_id)">
+      <img [src]="result.images.jpg.image_url" alt="{{ result.title }}" />
+      <h2>{{ result.title }}</h2>
+      <p>{{ result.synopsis }}</p>
+      <p>Puntuación: {{ result.score || 'N/A' }}</p>
+      <button (click)="goAnimeDetail(result.mal_id); $event.stopPropagation()">Ver detalle</button>
+      <button (click)="addAnimeToMyList(result); $event.stopPropagation()">
+        Agregar a mi lista
+      </button>
+    </div>
+  </div>
+
+  <div class="featured-sections">
+    <div class="right-column">
+      <div class="featured-anime" *ngIf="animeOfTheDay">
+        <div class="top-section">
+          <div class="card-header">
+            <h2>Recomendación del día</h2>
+            <p>No te pierdas este anime</p>
+          </div>
+          <div class="featured-card" (click)="goAnimeDetail(animeOfTheDay.mal_id)">
+            <img [src]="animeOfTheDay.images.jpg.image_url" />
+            <div class="card-info">
+              <h3>{{ animeOfTheDay.title }}</h3>
+              <p class="score">⭐ {{ animeOfTheDay.score || 'N/A' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section>
+        <div class="discovery-animes" *ngIf="discoveryAnimes.length">
+          <div class="top-section">
+            <div class="card-header">
+              <h2>Descubre nuevos animes</h2>
+            </div>
+            <div class="discovery-container">
+              <div
+                *ngFor="let anime of discoveryAnimes; let i = index"
+                [class.active]="i === currentDiscoveryIndex"
+                [style.opacity]="
+                  i === currentDiscoveryIndex
+                    ? 1
+                    : i === currentDiscoveryIndex + 1
+                    ? 0.7
+                    : i === currentDiscoveryIndex + 2
+                    ? 0.5
+                    : i === currentDiscoveryIndex + 3
+                    ? 0.3
+                    : 0
+                "
+                [style.transform]="
+                  i === currentDiscoveryIndex
+                    ? 'translateX(-50%) scale(1) translateY(0) rotate(0deg)'
+                    : i === currentDiscoveryIndex + 1
+                    ? 'translateX(-50%) scale(0.95) translateY(10px) rotate(-3deg)'
+                    : i === currentDiscoveryIndex + 2
+                    ? 'translateX(-50%) scale(0.9) translateY(20px) rotate(2deg)'
+                    : i === currentDiscoveryIndex + 3
+                    ? 'translateX(-50%) scale(0.85) translateY(30px) rotate(-4deg)'
+                    : 'translateX(-50%) scale(0.8) translateY(40px) rotate(3deg)'
+                "
+                class="discovery-card"
+              >
+                <img [src]="anime.images.jpg.image_url" [alt]="anime.title" />
+                <div class="card-info">
+                  <h3>{{ anime.title }}</h3>
+                  <p class="score">⭐ {{ anime.score || 'N/A' }}</p>
+                </div>
+              </div>
+              <div class="actions-buttons">
+                <button class="dissmiss" (click)="swipeLeft()"></button>
+                <button
+                  class="save"
+                  (click)="swipeRight(discoveryAnimes[currentDiscoveryIndex])"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

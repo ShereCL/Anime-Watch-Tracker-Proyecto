@@ -1,0 +1,55 @@
+<div class="my-list">
+  <h2>Mi Lista de Animes</h2>
+  <div class="filter-container">
+    <button (click)="filterList('all')">Todo</button>
+    <button (click)="filterList('Pendiente')">Pendiente</button>
+    <button (click)="filterList('Viendo')">Viendo</button>
+    <button (click)="filterList('Completado')">Completado</button>
+    <button (click)="filterList('Abandonado')">Abandonado</button>
+    <button (click)="filterList('favorite')">Favoritos</button>
+  </div>
+  <div *ngIf="!myList.length">
+    <p>No hay animes en la lista</p>
+  </div>
+
+  <div class="anime-card" *ngFor="let anime of filteredList">
+    <img [src]="anime.images.jpg.image_url" [alt]="anime.title" />
+    <div class="anime-info">
+      <h3>{{ anime.title }}</h3>
+      <p>
+        <strong>Puntuación: {{ anime.score || 'N/A' }}⭐</strong>
+      </p>
+      <p *ngIf="anime.score_user !== undefined">
+        <strong>Tu nota: {{ anime.score_user }}⭐</strong>
+      </p>
+      <div class="edit-score-container" *ngIf="editingScoreID === anime.mal_id">
+        <input type="number" min="0" max="10" [(ngModel)]="tempScore" />
+        <button (click)="saveScore(anime)">Guardar</button>
+        <button class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
+      </div>
+      <button
+        class="edit-score-btn"
+        *ngIf="editingScoreID !== anime.mal_id"
+        (click)="editScore(anime)"
+      >
+        Editar nota
+      </button>
+      <label
+        >Estado:
+        <select [(ngModel)]="anime.status" (change)="updateAnimeStatus(anime.mal_id, anime.status)">
+          <option value="Pendiente">Pendiente</option>
+          <option value="Viendo">Viendo</option>
+          <option value="Completado">Completado</option>
+          <option value="Abandonado">Abandonado</option>
+        </select>
+      </label>
+      <button (click)="toggleAnimeFavorite(anime.mal_id)">
+        {{ anime.favorite ? '★ Favorito' : '☆ Favorito' }}
+      </button>
+    </div>
+    <div class="btn-list-container">
+      <button (click)="goToAnimeDetail(anime.mal_id)">Ver detalle</button>
+      <button (click)="removeAnime(anime.mal_id)">Eliminar</button>
+    </div>
+  </div>
+</div>

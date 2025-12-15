@@ -1,0 +1,54 @@
+<div *ngIf="loading" class="loading">Cargando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+<div *ngIf="animeData" class="anime-detail fade-in">
+  <h1>{{ animeData.title }}</h1>
+  <img [src]="animeData.images.jpg.image_url" alt="{{ animeData.title }}" />
+  <p><strong class="bold">Sinopsis:</strong> {{ animeData.synopsis }}</p>
+  <p><strong class="bold">Episodios:</strong> {{ animeData.episodes }}</p>
+  <p><strong class="bold">Estado:</strong> {{ animeData.status }}</p>
+  <p><strong class="bold">Fecha de lanzamiento:</strong> {{ animeData.aired?.from | date }}</p>
+  <p><strong class="bold">Fecha de finalización:</strong> {{ animeData.aired?.to | date }}</p>
+  <div>
+    <strong class="bold">Géneros:</strong>
+    <ul>
+      <li *ngFor="let genre of animeData.genres">{{ genre.name }}</li>
+    </ul>
+  </div>
+  <p><strong class="bold">Puntuación:</strong> {{ animeData.score }}⭐</p>
+</div>
+<button class="button-add" (click)="addAnimeToMyList(animeData)">Agregar a mi lista</button>
+<div class="episodes-section" *ngIf="episodes.length > 0">
+  <h2>Episodios</h2>
+  <div *ngIf="loadingEpisodes" class="loading">Cargando episodios...</div>
+  <div class="episodes-list">
+    <div *ngFor="let episode of episodes" class="episode-card">
+      <span class="episode-number">Ep. {{ episode.mal_id }}</span>
+      <div class="episode-info">
+        <h3>{{ episode.title }}</h3>
+        <p class="episode-date">{{ episode.aired | date }}</p>
+        <a
+          *ngIf="episode.url"
+          [href]="episode.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-episode"
+          >Ver episodio</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<div class="reviews-section" *ngIf="reviews.length > 0">
+  <h2>Reseñas</h2>
+  <div *ngIf="loadingReviews" class="loading">Cargando reseñas...</div>
+  <div class="reviews-list">
+    <div *ngFor="let review of reviews" class="review-card">
+      <div class="review-header">
+        <strong>{{ review.user.username }}</strong>
+        <span class="review-score">⭐ {{ review.score }}/10</span>
+      </div>
+      <p class="review-text">{{ review.review }}</p>
+      <small class="review-date">{{ review.date | date }}</small>
+    </div>
+  </div>
+</div>
