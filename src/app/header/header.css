@@ -7,33 +7,20 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
-  width: 100%;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   backdrop-filter: blur(10px);
-  padding: 0;
-  position: sticky;
-  top: 0;
   z-index: 1000;
   box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
   border-bottom: 2px solid rgba(168, 85, 247, 0.3);
 }
+
 .container-header {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
   gap: 20px;
-}
-.container-header > .logo {
-  justify-self: start;
-}
-.container-header nav {
-  justify-self: center;
-}
-.container-header .theme-button {
-  justify-self: end;
 }
 
 .logo {
@@ -44,6 +31,7 @@ header {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
 .logo-link {
   display: flex;
   align-items: center;
@@ -56,6 +44,7 @@ header {
   height: 80px;
   object-fit: contain;
 }
+
 .logo:hover {
   transform: scale(1.05);
 }
@@ -64,6 +53,7 @@ header {
   font-size: 2rem;
   filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
 }
+
 @keyframes float {
   0%,
   100% {
@@ -123,9 +113,10 @@ nav a {
   align-items: center;
   gap: 8px;
   color: #e0e0e0;
+  font-size: 0.95rem;
   font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 12px;
+  padding: 8px 16px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
   border: 2px solid transparent;
   text-decoration: none;
@@ -135,20 +126,21 @@ nav a {
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* efecto hundido para las rutas */
 nav a:hover {
-  transform: translateY(4px);
+  transform: translateY(3px);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
   color: #ffb347;
 }
+
 nav a.active {
-  transform: translateY(4px);
+  transform: translateY(3px);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
   background: rgba(255, 255, 255, 0.12);
   color: #ffb347;
 }
+
 nav a.active:hover {
-  transform: translateY(4px);
+  transform: translateY(3px);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -157,21 +149,25 @@ nav a.active:hover {
   filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
 }
 
-/*Estilo botón modo claro oscuro*/
+.nav-theme {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Botón del tema siempre pegado a la derecha */
 .theme-button {
-  padding: 12px;
-  margin-left: 12px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #00eaff;
   background: transparent;
   color: #00eaff;
   cursor: pointer;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   flex-shrink: 0;
   white-space: nowrap;
   margin-left: auto;
-  position: absolute;
-  right: 40px;
 }
 
 .theme-button:hover {
@@ -181,40 +177,52 @@ nav a.active:hover {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 20px;
+  .container-header {
+    flex-wrap: wrap;
+    gap: 15px;
   }
 
   header h1 {
     font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  .logo-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
   }
 
   nav ul {
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   nav a {
     padding: 10px 18px;
     font-size: 0.9rem;
   }
+
+  .theme-button {
+    order: 2;
+  }
 }
 
 @media (max-width: 600px) {
-  .theme-button {
-    margin-left: 0;
-    margin-top: 10px;
-    width: 100%;
+  header {
+    padding: 15px 20px;
   }
-}
 
-@media (max-width: 1200px) {
   .container-header {
-    justify-content: space-between;
+    gap: 10px;
   }
 
-  .theme-button {
-    position: static;
+  header h1 {
+    font-size: 1.2rem;
   }
 }

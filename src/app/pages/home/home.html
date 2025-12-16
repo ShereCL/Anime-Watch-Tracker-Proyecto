@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Mis estadísticas</h1>
-  <div class="stats-section" *ngIf="myListStats.total > 0">
+  <div class="stats-section">
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">📚</div>
@@ -28,6 +28,9 @@
               <span class="genre-count">{{ genre.count }}</span>
             </li>
           </ul>
+          <p *ngIf="myListStats.topGenres.length === 0" class="no-genres">
+            Aún no tienes géneros favoritos
+          </p>
         </div>
       </div>
     </div>
